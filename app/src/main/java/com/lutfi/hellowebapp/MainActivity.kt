@@ -1,5 +1,6 @@
 package com.lutfi.hellowebapp
 
+import android.graphics.Bitmap
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,13 +8,14 @@ import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
 //    private val url = "https://tutorial.eyehunts.com"
-    private val url = "https://kitabisa.com/"
+    private val url = "http://103.31.251.4/csr_sukabumikota_19"
 //    private val url = "file:///android_asset/www/index.html"
 
 
@@ -78,8 +80,23 @@ class MainActivity : AppCompatActivity() {
 
         mywebview.setLayerType(View.LAYER_TYPE_HARDWARE, null)
 
-        mywebview.loadUrl(url)
+        mywebview.webViewClient = object: WebViewClient(){
+            override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
+                // Page loading started
+                // Do something
+                Toast.makeText( applicationContext ,"Page Loading...",Toast.LENGTH_LONG).show()
 
+            }
+
+            override fun onPageFinished(view: WebView, url: String) {
+                // Page loading finished
+                // Display the loaded page title in a toast message
+                Toast.makeText( applicationContext , "Page loaded: ${view.title} ", Toast.LENGTH_SHORT).show()
+
+            }
+        }
+
+        mywebview.loadUrl(url)
 
     }
 
