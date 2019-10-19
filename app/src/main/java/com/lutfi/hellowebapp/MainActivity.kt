@@ -15,8 +15,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 //    private val url = "https://tutorial.eyehunts.com"
-    private val url = "http://103.31.251.4/csr_sukabumikota_19"
-//    private val url = "file:///android_asset/www/index.html"
+//    private val url = "http://103.31.251.4/csr_sukabumikota_19"
+    private val url = "file:///android_asset/www/index.html"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,16 +84,16 @@ class MainActivity : AppCompatActivity() {
             override fun onPageStarted(view: WebView, url: String, favicon: Bitmap?) {
                 // Page loading started
                 // Do something
-                Toast.makeText( applicationContext ,"Page Loading...",Toast.LENGTH_LONG).show()
+                Toast.makeText( applicationContext ,"Loading...",Toast.LENGTH_LONG).show()
 
             }
 
-            override fun onPageFinished(view: WebView, url: String) {
+//            override fun onPageFinished(view: WebView, url: String) {
                 // Page loading finished
                 // Display the loaded page title in a toast message
-                Toast.makeText( applicationContext , "Page loaded: ${view.title} ", Toast.LENGTH_SHORT).show()
+//                Toast.makeText( applicationContext , "Page loaded: ${view.title} ", Toast.LENGTH_SHORT).show()
 
-            }
+//            }
         }
 
         mywebview.loadUrl(url)
@@ -106,6 +106,9 @@ class MainActivity : AppCompatActivity() {
             // If web view have back history,
             // then go to the web view back history
             mywebview.goBack()
+        }else{
+            finish();
+            System.exit(0);
         }
     }
 
